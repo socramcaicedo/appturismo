@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Model.TipoVehiculo;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -17,9 +20,8 @@ import java.awt.event.MouseEvent;
 public class frmTipoVehiculo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtnombre;
+	private JTextField txtdescripcion;
 
 	/**
 	 * Launch the application.
@@ -50,9 +52,9 @@ public class frmTipoVehiculo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("ID TIPO DE VEHICULO:");
+		JLabel lblNewLabel = new JLabel("TIPO DE VEHICULO:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(28, 21, 145, 24);
+		lblNewLabel.setBounds(172, 11, 145, 24);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNombreDeTipo = new JLabel("NOMBRE DE TIPO DE VEHICULO");
@@ -65,20 +67,15 @@ public class frmTipoVehiculo extends JFrame {
 		lblDescripcion.setBounds(28, 133, 89, 24);
 		contentPane.add(lblDescripcion);
 		
-		textField = new JTextField();
-		textField.setBounds(171, 25, 243, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtnombre = new JTextField();
+		txtnombre.setColumns(10);
+		txtnombre.setBounds(89, 89, 325, 20);
+		contentPane.add(txtnombre);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(89, 89, 325, 20);
-		contentPane.add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(89, 155, 325, 48);
-		contentPane.add(textField_2);
+		txtdescripcion = new JTextField();
+		txtdescripcion.setColumns(10);
+		txtdescripcion.setBounds(89, 155, 325, 48);
+		contentPane.add(txtdescripcion);
 		
 		JButton btnGuardar = new JButton("REGISTRAR");
 		btnGuardar.setActionCommand("REGISTRAR");
@@ -87,13 +84,16 @@ public class frmTipoVehiculo extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				//AQUI VA LA VUELTA
+				TipoVehiculo tpVehiculo = new TipoVehiculo(txtnombre.getText(),txtdescripcion.getText());
+				
+				tpVehiculo.insertar(txtnombre.getText(),txtdescripcion.getText());
+				txtnombre.setText("");
+				txtdescripcion.setText("");
+				
 				
 			}
 		});
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+	
 		btnGuardar.setBounds(184, 214, 89, 23);
 		contentPane.add(btnGuardar);
 	}

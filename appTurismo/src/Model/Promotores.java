@@ -9,21 +9,21 @@ import javax.swing.JOptionPane;
 import conroller.Conexion;
 
 public class Promotores {
-	int id;
+	
 	public Promotores(int id, String tipodocumento, int documento, String nombres, String apellidos, String dirección,
-			String correopersonal, String correocorp, String teléfono) {
+			String correopersonal, String correocorp, String telefono) {
 		super();
 		this.id = id;
 		this.tipodocumento = tipodocumento;
 		this.documento = documento;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
-		this.dirección = dirección;
+		this.direccion = dirección;
 		this.correopersonal = correopersonal;
 		this.correocorp = correocorp;
-		this.teléfono = teléfono;
+		this.telefono = telefono;
 	}
-	String tipodocumento;
+	
 	public int getId() {
 		return id;
 	}
@@ -55,10 +55,10 @@ public class Promotores {
 		this.apellidos = apellidos;
 	}
 	public String getDirección() {
-		return dirección;
+		return direccion;
 	}
 	public void setDirección(String dirección) {
-		this.dirección = dirección;
+		this.direccion = dirección;
 	}
 	public String getCorreopersonal() {
 		return correopersonal;
@@ -72,33 +72,37 @@ public class Promotores {
 	public void setCorreocorp(String correocorp) {
 		this.correocorp = correocorp;
 	}
-	public String getTeléfono() {
-		return teléfono;
+	public String getTelefono() {
+		return telefono;
 	}
-	public void setTeléfono(String teléfono) {
-		this.teléfono = teléfono;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
+	int id;
+	String tipodocumento;
 	int documento;
 	String nombres;
 	String apellidos;
-	String dirección;
+	String direccion;
 	String correopersonal;
 	String correocorp;
-	String teléfono;
-	public void insertar (String tipoDocumento, int numeroDocumento,String nombre,String apellidos,String direccion,String correo,float teléfono,int idvehiculo) {
-		String query = "insert into tbloperadores (tipodocumento,numerodocumento,nombre,apellidos,direccion,correo,telefono,idvehiculo) VALUES (?,?,?,?,?,?,?,?)";
+	String telefono;
+	public void insertar (int id,String tipodocumento,int documento, String nombres,String apellidos,String direccion,String correopersonal,String correocop,String telefono) {
+		String query = "insert into promotores (id,tipodocumento,documento,nombres,apellidos,direccion,correopersonal,correocorp,telefono) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
             Connection conexBd = Conexion.conectarBD();
             PreparedStatement ps = conexBd.prepareCall(query);
-            ps.setString(1,  tipoDocumento);
-            ps.setFloat(2, numeroDocumento);
-            ps.setString(3, nombre);
-            ps.setString(4,  apellidos);
-            ps.setString(5,direccion);
-            ps.setString(6, correo);
-            ps.setFloat(7,teléfono);
-            ps.setFloat(8, idvehiculo);
+            ps.setFloat(1, id);
+            ps.setString(2, tipodocumento);
+            ps.setFloat(3, documento);
+            ps.setString(4, nombres);
+            ps.setString(5,  apellidos);
+            ps.setString(6,direccion);
+            ps.setString(7, correopersonal);
+            ps.setString(8, correocorp);
+            ps.setString(9,telefono);
+           
          
          
             int filasAfectadas = ps.executeUpdate();
@@ -109,7 +113,7 @@ public class Promotores {
             }
 
         } catch (SQLException e) {
-        	JOptionPane.showMessageDialog(null,"Error al insertar dato" + e.getMessage());
+        	JOptionPane.showMessageDialog(null,"Error al insertar dato " + e.getMessage());
 		
 		
 		
