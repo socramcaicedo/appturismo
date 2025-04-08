@@ -2,9 +2,11 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import conroller.Conexion;
 
@@ -81,6 +83,10 @@ public Vehiculos(int idVehiculo, int idTipoVehiculo, int matricula, String marca
 		this.categoria = categoria;
 	}
 
+public Vehiculos() {
+	// TODO Auto-generated constructor stub
+}
+
 int idVehiculo;
 int idTipoVehiculo;
 int matricula;
@@ -120,4 +126,65 @@ public void insertar (int idTipoVehiculo,int idVehiculo,int matricula,String mar
 	
     }
 }
+public void eliminar (int idVehiculo) {
+	String query = "delete from  tblvehiculos where idvehiculo = ?";
+
+    try {
+        Connection conexBd = Conexion.conectarBD();
+        PreparedStatement ps = conexBd.prepareCall(query);
+        
+      
+        ps.setInt(1, idVehiculo);
+      
+       
+     
+     
+        int filasAfectadas = ps.executeUpdate();
+        if (filasAfectadas > 0) {
+        	JOptionPane.showMessageDialog(null,"Datos eliminados exitosamente.");
+        } else {
+        	JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro.");
+        }
+
+    } catch (SQLException e) {
+    	JOptionPane.showMessageDialog(null,"Error al eliminar datos de la fila" + e.getMessage());
+	
+	
+	
+    }
+}
+
+public void consultar (int id, JTextField idTipoVehiculo, JTextField  idVehiculo,  JTextField  matricula ,JTextField marca, JTextField capacidad, JTextField modelo, JTextField categoria ) {
+	String query = "SELECT * FROM  tblvehiculos where idvehiculo = ?" ;
+	  // Conectar a la base de datos
+Connection conexBd =  Conexion.conectarBD();
+try {
+		PreparedStatement ps = conexBd.prepareCall(query);
+		ps.setInt(1,id);
+		ResultSet result = ps.executeQuery();
+		while (result.next()) {
+			
+			
+			
+			  idTipoVehiculo.setText(result.getString(1));
+		        idVehiculo.setText(result.getString(2));
+		        matricula.setText(result.getString(3));
+		        marca.setText(result.getString(4));                                   
+		        capacidad.setText(result.getString(5));
+		        modelo.setText(result.getString(6));
+		       categoria.setText(result.getString(7));
+		       
+			
+		
+            }
+
+
+} catch (SQLException e) {
+		// TODO Auto-generated catch block
+System.out.println("error al consultar"+e.getMessage());
+	}
+
+}
+
+
 }

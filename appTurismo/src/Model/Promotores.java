@@ -2,13 +2,18 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import conroller.Conexion;
 
 public class Promotores {
+	
+	public Promotores() {
+	}
 	
 	public Promotores(int id, String tipodocumento, int documento, String nombres, String apellidos, String dirección,
 			String correopersonal, String correocorp, String telefono) {
@@ -87,6 +92,9 @@ public class Promotores {
 	String correopersonal;
 	String correocorp;
 	String telefono;
+	
+	
+	//___________________________________________________________________________________________________________________________________________________________________________________________________________________
 	public void insertar (int id,String tipodocumento,int documento, String nombres,String apellidos,String direccion,String correopersonal,String correocop,String telefono) {
 		String query = "insert into promotores (id,tipodocumento,documento,nombres,apellidos,direccion,correopersonal,correocorp,telefono) VALUES (?,?,?,?,?,?,?,?,?)";
 
@@ -119,6 +127,98 @@ public class Promotores {
 		
         }
 	}
+	//___________________________________________________________________________________________________________________________________________________________________________________________________________________
+	public void eliminar (int id) {
+		String query = "delete from promotores where id=?";
+
+        try {
+            Connection conexBd = Conexion.conectarBD();
+            PreparedStatement ps = conexBd.prepareCall(query);
+            ps.setInt(1, id);
+           
+         
+         
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+            	JOptionPane.showMessageDialog(null,"Datos eliminados exitosamente.");
+            } else {
+            	JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro.");
+            }
+
+        } catch (SQLException e) {
+        	JOptionPane.showMessageDialog(null,"Error al eliminar datos de la fila " + e.getMessage());
+		
+		
+		
+        }
+	}
+	//___________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+	 public void consultar (int id,    JTextField  tipodocumento,JTextField numeroDocumento  ,JTextField nombre, JTextField  apellidos, JTextField direccion, JTextField  correoper, JTextField  correocorp,JTextField teléfono ) {
+			String query = "SELECT * FROM  promotores where id = ?" ;
+			  // Conectar a la base de datos
+Connection conexBd =  Conexion.conectarBD();
+try {
+				PreparedStatement ps = conexBd.prepareCall(query);
+				ps.setInt(1,id);
+				ResultSet result = ps.executeQuery();
+				while (result.next()) {
+					
+					tipodocumento.setText(result.getString(2));
+					numeroDocumento.setText(result.getString(3));
+					nombre.setText(result.getString(4));
+					apellidos.setText(result.getString(5));
+					 direccion.setText(result.getString(6));
+					 correoper.setText(result.getString(7));
+					 correocorp.setText(result.getString(8));
+					 teléfono.setText(result.getString(9));
+					
+					
+				
+		            }
 
 
+} catch (SQLException e) {
+				// TODO Auto-generated catch block
+	System.out.println("error al consultar"+e.getMessage());
+			}
+	 
+	 }
+	//___________________________________________________________________________________________________________________________________________________________________________________________________________________
+	 
+	 public void  modificar (int id,String tipodocumento,int documento, String nombres,String apellidos,String direccion,String correopersonal,String correocop,String telefono) {
+			String query = "update promotores set tipodocumento = ?, documento = ?, nombres = ?, apellidos = ?, direccion = ?, correopersonal = ?, correocorp = ?, telefono = ? where id = ?";
+
+	        try {
+	            Connection conexBd = Conexion.conectarBD();
+	            PreparedStatement ps = conexBd.prepareCall(query);
+	          
+	            ps.setString(1, tipodocumento);
+	            ps.setInt(2, documento);
+	            ps.setString(3, nombres);
+	            ps.setString(4,  apellidos);
+	            ps.setString(5,direccion);
+	            ps.setString(6, correopersonal);
+	            ps.setString(7, correocop);
+	            ps.setString(8,telefono);
+	            ps.setInt(9, id);
+	           
+	         
+	         
+	            int filasAfectadas = ps.executeUpdate();
+	            if (filasAfectadas > 0) {
+	            	JOptionPane.showMessageDialog(null,"Datos actualizados exitosamente.");
+	            } else {
+	            	JOptionPane.showMessageDialog(null,"No se pudo actualizar el registro.");
+	            }
+
+	        } catch (SQLException e) {
+	        	JOptionPane.showMessageDialog(null,"Error al actualizar datos " + e.getMessage());
+			
+			
+			
+	        }
+		} 
+	 
+	 
 }

@@ -13,9 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class frmPaquetes extends JFrame {
 
@@ -34,7 +37,8 @@ public class frmPaquetes extends JFrame {
 	private JTextField txtIdVehiculo;
 	private JTextField txtIdPromotor;
 	private JTextField txtIdMedios;
-
+	private JTextField txtCamEli;
+	Paquetes paq = new Paquetes();
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +60,7 @@ public class frmPaquetes extends JFrame {
 	 */
 	public frmPaquetes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 570, 330);
+		setBounds(100, 100, 717, 330);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -204,5 +208,73 @@ public class frmPaquetes extends JFrame {
 		lblPaquetesTuristico.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		lblPaquetesTuristico.setBounds(171, 11, 144, 14);
 		contentPane.add(lblPaquetesTuristico);
+		
+		JLabel lblIdDeLa_1 = new JLabel("REGISTRO BD");
+		lblIdDeLa_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblIdDeLa_1.setBounds(523, 73, 148, 14);
+		contentPane.add(lblIdDeLa_1);
+		
+		JButton btnEliminar = new JButton("ELIMINAR ");
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				paq.eliminar(Integer.parseInt(txtCamEli.getText()));
+				
+			}
+		});
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Documents\\ADSO CAICEDO\\icons8-eliminar-24.png"));
+		btnEliminar.setBounds(570, 115, 113, 23);
+		contentPane.add(btnEliminar);
+		
+		txtCamEli = new JTextField();
+		txtCamEli.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		txtCamEli.setColumns(10);
+		txtCamEli.setBounds(512, 138, 141, 32);
+		contentPane.add(txtCamEli);
+		
+		JLabel lblCodigoPaquete = new JLabel("CODIGO PAQUETE:");
+		lblCodigoPaquete.setBounds(519, 173, 110, 14);
+		contentPane.add(lblCodigoPaquete);
+		JButton btnNewButtonConsultar = new JButton("");
+		btnNewButtonConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButtonConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			paq.consultar(Integer.parseInt(txtCamEli.getText()), txtIdDestino, txtIdOrigen, txtFechaVenta, txtHoraVenta, txtHoraSalida, txtFechaEjecucion, txtObservacion, txtPrecio, txtIdAgencia, txtCliente, txtIdMedios, txtIdPromotor, txtIdVehiculo);
+				
+				 
+				
+			}
+		});
+		btnNewButtonConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-magnifying-glass-tilted-right-48.png"));
+		btnNewButtonConsultar.setBounds(469, 100, 89, 41);
+		contentPane.add(btnNewButtonConsultar);
+	
+
+		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\intercambiar-documentos (1).png"));
+		btnModificar.setBounds(570, 89, 130, 23);
+		contentPane.add(btnModificar);
+
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				paq.modificar(Integer.parseInt(txtCamEli.getText()),Integer.parseInt(txtIdDestino.getText()),Integer.parseInt(txtIdOrigen.getText()),txtFechaVenta.getText(),txtHoraVenta.getText(),txtHoraSalida.getText(),
+                        txtFechaEjecucion.getText(),txtObservacion.getText(),txtPrecio.getText(),Integer.parseInt(txtIdAgencia.getText()),Integer.parseInt(txtCliente.getText()),Integer.parseInt(txtIdMedios.getText()) ,
+                        Integer.parseInt(txtIdPromotor.getText()),Integer.parseInt(txtIdVehiculo.getText()));
+				
+					
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "ID inválido.");
+				}
+			}
+		});
+		
+	
 	}
 }

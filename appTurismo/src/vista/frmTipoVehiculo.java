@@ -16,12 +16,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class frmTipoVehiculo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtnombre;
 	private JTextField txtdescripcion;
+	private JTextField txtCamEli;
+	TipoVehiculo tpVehiculo = new TipoVehiculo();
 
 	/**
 	 * Launch the application.
@@ -45,7 +48,7 @@ public class frmTipoVehiculo extends JFrame {
 	public frmTipoVehiculo() {
 		setTitle("TIPO DE VEHICULO");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 485, 300);
+		setBounds(100, 100, 927, 300);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -96,5 +99,55 @@ public class frmTipoVehiculo extends JFrame {
 	
 		btnGuardar.setBounds(184, 214, 89, 23);
 		contentPane.add(btnGuardar);
+		
+		JLabel lblIdDeLa_1 = new JLabel(" REGISTRO BD");
+		lblIdDeLa_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblIdDeLa_1.setBounds(492, 69, 148, 14);
+		contentPane.add(lblIdDeLa_1);
+		
+		JButton btnEliminar = new JButton("ELIMINAR ");
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TipoVehiculo tpVehiculo = new TipoVehiculo(Integer.parseInt(txtCamEli.getText()));
+				
+				tpVehiculo.eliminar(Integer.parseInt(txtCamEli.getText()));
+				
+				
+			}
+		});
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Documents\\ADSO CAICEDO\\icons8-eliminar-24.png"));
+		btnEliminar.setBounds(453, 107, 113, 23);
+		contentPane.add(btnEliminar);
+		
+		txtCamEli = new JTextField();
+		txtCamEli.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		txtCamEli.setColumns(10);
+		txtCamEli.setBounds(499, 128, 141, 32);
+		contentPane.add(txtCamEli);
+		
+		JLabel lblIdTipoVehiculo = new JLabel("ID TIPO VEHICULO");
+		lblIdTipoVehiculo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblIdTipoVehiculo.setBounds(509, 165, 148, 24);
+		contentPane.add(lblIdTipoVehiculo);
+		
+		JButton btnNewButtonConsultar = new JButton("");
+		btnNewButtonConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButtonConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				tpVehiculo.consultar(Integer.parseInt(txtCamEli.getText()), txtnombre, txtdescripcion);
+				
+				 
+				
+			}
+		});
+		btnNewButtonConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-magnifying-glass-tilted-right-48.png"));
+		btnNewButtonConsultar.setBounds(576, 89, 89, 41);
+		contentPane.add(btnNewButtonConsultar);
 	}
 }

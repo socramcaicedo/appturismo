@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import Model.Agencias;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class frmAgencias extends JFrame {
 
@@ -30,6 +33,8 @@ public class frmAgencias extends JFrame {
 	private JTextField textTelefono;
 	private JTextField textDireccion;
 	private JTextField textweb;
+	private JTextField txtCamEli;
+	Agencias agen =new Agencias();
 
 	/**
 	 * Launch the application.
@@ -53,7 +58,7 @@ public class frmAgencias extends JFrame {
 	public frmAgencias() {
 		setTitle("REGISTRAR AGENCIA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 493, 566);
+		setBounds(100, 100, 705, 566);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -99,7 +104,7 @@ public class frmAgencias extends JFrame {
 		contentPane.add(lblDireecion);
 		
 		textNomAgencia = new JTextField();
-		textNomAgencia.setBounds(10, 60, 438, 32);
+		textNomAgencia.setBounds(10, 60, 438, 32); 
 		contentPane.add(textNomAgencia);
 		textNomAgencia.setColumns(10);
 		
@@ -109,6 +114,13 @@ public class frmAgencias extends JFrame {
 		contentPane.add(textIdAgencia);
 		
 		textIdComp = new JTextField();
+		textIdComp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtCamEli.setText(textIdAgencia.getText());
+				
+			}
+		});
 		textIdComp.setColumns(10);
 		textIdComp.setBounds(10, 165, 438, 32);
 		contentPane.add(textIdComp);
@@ -147,6 +159,75 @@ public class frmAgencias extends JFrame {
 		
 		btnGuardar.setBounds(201, 472, 89, 23);
 		contentPane.add(btnGuardar);
-	}
+		
+		JButton btnEliminar = new JButton("ELIMINAR ");
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Documents\\ADSO CAICEDO\\icons8-eliminar-24.png"));
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//aquiiiii
+				Agencias agen =new Agencias();
+           agen.eliminar(Integer.parseInt(txtCamEli.getText()));
+          
+				
+			}
+		});
+		btnEliminar.setBounds(470, 226, 114, 23);
+		contentPane.add(btnEliminar);
+		
+		JLabel lblIdDeLa_1_1 = new JLabel("REGISTRO");
+		lblIdDeLa_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblIdDeLa_1_1.setBounds(520, 183, 148, 14);
+		contentPane.add(lblIdDeLa_1_1);
+		
+		JLabel lblIdDeLa_1_1_1 = new JLabel("AGENCIA");
+		lblIdDeLa_1_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblIdDeLa_1_1_1.setBounds(572, 299, 72, 14);
+		contentPane.add(lblIdDeLa_1_1_1);
+		
+		txtCamEli = new JTextField();
+		txtCamEli.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		txtCamEli.setColumns(10);
+		txtCamEli.setBounds(527, 260, 141, 32);
+		contentPane.add(txtCamEli);
+		
+		JButton btnNewButtonConsultar = new JButton("");
+		btnNewButtonConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Agencias agen =new Agencias();
+				agen.consultar(Integer.parseInt(txtCamEli.getText()),textNomAgencia ,textIdComp, textDireccion, textCorreo, textTelefono, textweb);
+				
+				 
+				
+			}
+		});
+		btnNewButtonConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-magnifying-glass-tilted-right-48.png"));
+		btnNewButtonConsultar.setBounds(590, 208, 89, 41);
+		contentPane.add(btnNewButtonConsultar);
+		
+		
 
+		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.setBounds(559, 245, 120, 23);
+		contentPane.add(btnModificar);
+
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+				
+
+					agen.modificar(Integer.parseInt(textIdAgencia.getText()),Integer.parseInt(textIdComp.getText()),textNomAgencia.getText(),
+							textDireccion.getText(),textCorreo.getText(),textTelefono.getText(),textweb.getText());
+
+					
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "ID inválido.");
+				}
+			}
+		});
+		
+		
+	}
 }

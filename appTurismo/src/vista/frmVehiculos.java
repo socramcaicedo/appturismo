@@ -12,8 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class frmVehiculos extends JFrame {
 
@@ -26,6 +31,8 @@ public class frmVehiculos extends JFrame {
 	private JTextField txtIdVehiculo;
 	private JTextField txtMarca;
 	private JTextField txtModelo;
+	private JTextField txtCamEli;
+	Vehiculos vehiculo = new Vehiculos();
 
 	/**
 	 * Launch the application.
@@ -49,7 +56,7 @@ public class frmVehiculos extends JFrame {
 	public frmVehiculos() {
 		setTitle("VEHICULOS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 629, 321);
+		setBounds(100, 100, 673, 475);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -59,7 +66,7 @@ public class frmVehiculos extends JFrame {
 		JPanel contentPane_1 = new JPanel();
 		contentPane_1.setLayout(null);
 		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane_1.setBounds(10, 11, 592, 261);
+		contentPane_1.setBounds(10, 11, 617, 261);
 		contentPane.add(contentPane_1);
 		
 		JButton btnGuardar = new JButton("REGISTRAR");
@@ -150,5 +157,60 @@ public class frmVehiculos extends JFrame {
 		txtModelo.setColumns(10);
 		txtModelo.setBounds(412, 106, 131, 20);
 		contentPane_1.add(txtModelo);
+		
+		JLabel lblIdDeLa_1 = new JLabel("REGISTRO BD");
+		lblIdDeLa_1.setForeground(Color.RED);
+		lblIdDeLa_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblIdDeLa_1.setBounds(494, 283, 175, 14);
+		contentPane.add(lblIdDeLa_1);
+		
+		JButton btnEliminar = new JButton("ELIMINAR ");
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				vehiculo.eliminar(Integer.parseInt(txtCamEli.getText()));
+				
+				
+			}
+		});
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Documents\\ADSO CAICEDO\\icons8-eliminar-24.png"));
+		btnEliminar.setBounds(544, 326, 113, 23);
+		contentPane.add(btnEliminar);
+		
+		txtCamEli = new JTextField();
+		txtCamEli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtCamEli.setText(txtIdVehiculo.getText());
+			}
+		});
+		txtCamEli.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		txtCamEli.setColumns(10);
+		txtCamEli.setBounds(474, 360, 141, 32);
+		contentPane.add(txtCamEli);
+		JButton btnNewButtonConsultar = new JButton("");
+		btnNewButtonConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButtonConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				 
+				vehiculo.consultar(Integer.parseInt(txtCamEli.getText()), txtTpVehiculo, txtIdVehiculo, txtMatricula, txtMarca, txtCapacidad, txtModelo, txtCatego);
+				 
+				
+			}
+		});
+		btnNewButtonConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-magnifying-glass-tilted-right-48.png"));
+		btnNewButtonConsultar.setBounds(440, 308, 89, 41);
+		contentPane.add(btnNewButtonConsultar);
+		
+		JLabel lblIdVehiculo = new JLabel("ID VEHICULO");
+		lblIdVehiculo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblIdVehiculo.setBounds(484, 392, 170, 21);
+		contentPane.add(lblIdVehiculo);
 	}
 }

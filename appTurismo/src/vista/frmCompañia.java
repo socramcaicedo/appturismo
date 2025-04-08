@@ -8,9 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class frmCompañia extends JFrame {
 
@@ -23,6 +29,11 @@ public class frmCompañia extends JFrame {
 	private JTextField telefono;
 	private JTextField fechCreacion;
 	private JTextField direcWeb;
+	private JLabel lblIdDeLa_1;
+	private JButton btnEliminar;
+	private JTextField txtCamEli;
+	private JLabel lblNewLabel_1;
+	Compañia compa = new Compañia();
 
 	/**
 	 * Launch the application.
@@ -48,8 +59,15 @@ public class frmCompañia extends JFrame {
 	public frmCompañia() {
 		setTitle("REGISTRA NUEVA COMPAÑIA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 703, 421);
+		setBounds(100, 100, 805, 421);
 		contentPane = new JPanel();
+		contentPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//aquiiiiiiiiiiiiiiiiii jtex
+				txtCamEli.setText(idCom.getText());
+			}
+		});
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -129,5 +147,83 @@ public class frmCompañia extends JFrame {
 		});
 		btnGuardar.setBounds(152, 317, 89, 23);
 		contentPane.add(btnGuardar);
+		
+		lblIdDeLa_1 = new JLabel("REGISTRO BD");
+		lblIdDeLa_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		lblIdDeLa_1.setBounds(536, 156, 148, 14);
+		contentPane.add(lblIdDeLa_1);
+		
+		btnEliminar = new JButton("ELIMINAR ");
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Documents\\ADSO CAICEDO\\icons8-eliminar-24.png"));
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//AQUIIIIIIIIIIIIIIIIIII BOTON
+				Compañia compa = new Compañia(Integer.parseInt(txtCamEli.getText()));
+				compa.eliminar(Integer.parseInt(txtCamEli.getText()));
+			}
+		});
+		btnEliminar.setBounds(573, 214, 111, 23);
+		contentPane.add(btnEliminar);
+		
+		txtCamEli = new JTextField();
+		txtCamEli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				txtCamEli.setText(idCom.getText());
+			}
+		});
+		txtCamEli.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		txtCamEli.setColumns(10);
+		txtCamEli.setBounds(499, 243, 141, 32);
+		contentPane.add(txtCamEli);
+		
+		lblNewLabel_1 = new JLabel("ID COMPAÑIA");
+		lblNewLabel_1.setBounds(20, 57, 134, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButtonConsultar = new JButton("");
+		btnNewButtonConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButtonConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				compa.consultar(Integer.parseInt(txtCamEli.getText()), nomComp, direcCom, telefono, fechCreacion, correo, direcWeb);
+				
+				 idCom.setText(txtCamEli.getText());
+				
+				 
+				
+			}
+		});
+		btnNewButtonConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-magnifying-glass-tilted-right-48.png"));
+		btnNewButtonConsultar.setBounds(474, 195, 89, 41);
+		contentPane.add(btnNewButtonConsultar);
+		
+
+		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\intercambiar-documentos (1).png"));
+		btnModificar.setBounds(573, 194, 120, 23);
+		contentPane.add(btnModificar);
+
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					 idCom.setText(txtCamEli.getText());
+				compa.modificar(Integer.parseInt(txtCamEli.getText())  ,nomComp.getText(),direcCom.getText(),correo.getText(),telefono.getText(),fechCreacion.getText(),direcWeb.getText());
+					
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "ID inválido.");
+				}
+			}
+		});
+		
+		
 	}
+	
+	
+	
 }

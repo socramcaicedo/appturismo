@@ -1,11 +1,14 @@
-
+ 
 package Model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import conroller.Conexion;
 
@@ -66,7 +69,7 @@ public class Agencias {
 		this.idCompañia = idCompañia;
 	}
 
-	public Agencias(int idCompañia) {
+	public Agencias() {
 		super();
 		this.idCompañia = idCompañia;
 	}
@@ -108,4 +111,82 @@ public class Agencias {
 	        }
 		}
 
+	 
+	 public void eliminar (int idagencia) {
+			String query = "DELETE FROM  tblagencias " ;
+
+	        try {
+	            Connection conexBd = Conexion.conectarBD();
+	            PreparedStatement ps = conexBd.prepareCall(query);
+	            ps.setInt(1, idagencia);
+	           
+	         
+	            int filasAfectadas = ps.executeUpdate();
+	            if (filasAfectadas > 0) {
+	            	JOptionPane.showMessageDialog(null,"Datos ELIMINADOS exitosamente.");
+	            } else {
+	            	JOptionPane.showMessageDialog(null,"No se pudo ELIMINAR el registro DE LA FILA.");
+	            }
+
+	        } catch (SQLException e) {
+	        	JOptionPane.showMessageDialog(null,"Error al ELIMINAR FILA dato" + e.getMessage());
+			
+			
+			
+	        }
+		}
+	 
+	 public void consultar (int idagencia,JTextField razonsocial,  JTextField idcompania,JTextField direccion,JTextField correo,JTextField telefono,JTextField web) {
+			String query = "SELECT * FROM  tblagencias where idagencia = ?" ;
+			  // Conectar a la base de datos
+            Connection conexBd =  Conexion.conectarBD();
+            try {
+				PreparedStatement ps = conexBd.prepareCall(query);
+				ps.setInt(1, idagencia);
+				ResultSet result = ps.executeQuery();
+				while (result.next()) {
+					
+					idcompania.setText(result.getString(2));
+					razonsocial.setText(result.getString(3)); 
+					direccion.setText(result.getString(4));
+					correo.setText(result.getString(5));
+					telefono.setText(result.getString(6));
+					web.setText(result.getString(7));
+				 
+		            }
+            
+            
+            } catch (SQLException e) {
+				// TODO Auto-generated catch block
+            	System.out.println("error al consultar"+e.getMessage());
+			}
+	 
+	 }
+	 
+	 public void modificar(int idagencia, int idCompañia, String razonSocial, String direccion, String correo, String telefono, String web) {
+			String query = "UPDATE tblagencias SET idcompania = ?, razonsocial = ?, direccion = ?, correo = ?, telefono = ?, web = ? WHERE idagencia = ?";
+
+			try {
+				Connection conexBd = Conexion.conectarBD();
+				PreparedStatement ps = conexBd.prepareCall(query);
+				
+				ps.setInt(1, idCompañia);
+				ps.setString(2, razonSocial);
+				ps.setString(3, direccion);
+				ps.setString(4, correo);
+				ps.setString(5, telefono);
+				ps.setString(6, web);
+				ps.setInt(7, idagencia); // ID para el WHERE
+
+				int filasAfectadas = ps.executeUpdate();
+				if (filasAfectadas > 0) {
+					JOptionPane.showMessageDialog(null, "Datos modificados exitosamente.");
+				} else {
+					JOptionPane.showMessageDialog(null, "No se encontró el registro para modificar.");
+				}
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Error al modificar datos: " + e.getMessage());
+			}
+		} 
+	 
 }
