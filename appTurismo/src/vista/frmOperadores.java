@@ -228,6 +228,17 @@ public class frmOperadores extends JFrame {
 				}
 			}
 		});
-		
+		JButton btnNewButton = new JButton("REGRESAR");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Menu sale = new Menu ();
+				sale.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setBounds(548, 11, 120, 23);
+		contentPane.add(btnNewButton);
 	}
 }

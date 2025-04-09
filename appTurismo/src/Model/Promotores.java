@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import conroller.Conexion;
+import vista.Menu;
 
 public class Promotores {
 	
@@ -244,9 +245,42 @@ try {
 	        }
 		} 
 	//___________________________________________________________________________________________________________________________________________________________________________________________________________________
-	 public void ingresar(int documento, String contrasena) {
-		 
-		 
-	 }
+	 public static boolean Usuario( int documento, String contraseña) {
+	        boolean resultado = false;
+
+	        Connection conn = Conexion.conectarBD();
+
+	        String query = "SELECT * FROM promotores WHERE documento = ? AND contraseña = ?";
+
+	        try {
+	            PreparedStatement stmt = conn.prepareStatement(query);
+	            stmt.setInt(1,documento);
+	            stmt.setString(2, contraseña);
+
+	            ResultSet rs = stmt.executeQuery();
+
+	            if (rs.next()) {
+	                resultado = true;
+	                
+	                Menu sale = new Menu ();
+					sale.setVisible(true);
+					dispose();
+	            }
+
+	            rs.close();
+	            stmt.close();
+	            conn.close();
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return resultado;
+	    }
+
+	private static void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 	 
 }

@@ -59,7 +59,7 @@ public class frmTipoMedios extends JFrame {
 	public frmTipoMedios() {
 		setTitle("TIPOS DE MEDIOS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 880, 352);
+		setBounds(100, 100, 798, 342);
 		idTipo = new JPanel();
 		idTipo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -95,7 +95,7 @@ public class frmTipoMedios extends JFrame {
 		});
 	
 		btnGuardar.setActionCommand("REGISTRAR");
-		btnGuardar.setBounds(260, 227, 89, 23);
+		btnGuardar.setBounds(250, 227, 89, 23);
 		idTipo.add(btnGuardar);
 		
 		JLabel lblIdTipoDe = new JLabel("ID TIPO DE MEDIOS:");
@@ -114,7 +114,7 @@ public class frmTipoMedios extends JFrame {
 		idTipo.add(lblDescripcion);
 		
 		idTip = new JTextField();
-		idTip.setBounds(163, 51, 186, 20);
+		idTip.setBounds(164, 51, 186, 20);
 		idTipo.add(idTip);
 		idTip.setColumns(10);
 		
@@ -132,7 +132,7 @@ public class frmTipoMedios extends JFrame {
 		
 		JButton btnCancelar = new JButton("CANCELAR");
 		btnCancelar.setActionCommand("REGISTRAR");
-		btnCancelar.setBounds(124, 227, 89, 23);
+		btnCancelar.setBounds(125, 227, 89, 23);
 		idTipo.add(btnCancelar);
 		
 		JLabel lblFormularioTipoDe = new JLabel("FORMULARIO TIPO DE MEDIOS");
@@ -158,7 +158,7 @@ public class frmTipoMedios extends JFrame {
 			}
 		});
 		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Documents\\ADSO CAICEDO\\icons8-eliminar-24.png"));
-		btnEliminar.setBounds(566, 279, 113, 23);
+		btnEliminar.setBounds(540, 279, 113, 23);
 		idTipo.add(btnEliminar);
 		
 		txtCamEli = new JTextField();
@@ -172,7 +172,7 @@ public class frmTipoMedios extends JFrame {
 		});
 		txtCamEli.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		txtCamEli.setColumns(10);
-		txtCamEli.setBounds(595, 202, 141, 32);
+		txtCamEli.setBounds(584, 195, 141, 32);
 		idTipo.add(txtCamEli);
 		idTipo.add(txtCamEli);
 		JButton btnNewButtonConsultar_1 = new JButton("");
@@ -183,7 +183,7 @@ public class frmTipoMedios extends JFrame {
 			}
 		});
 		btnNewButtonConsultar_1.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-magnifying-glass-tilted-right-48.png"));
-		btnNewButtonConsultar_1.setBounds(645, 238, 89, 41);
+		btnNewButtonConsultar_1.setBounds(663, 261, 89, 41);
 		idTipo.add(btnNewButtonConsultar_1);
 		
 	
@@ -230,7 +230,31 @@ public class frmTipoMedios extends JFrame {
 			}
 		});
 		
+		JButton btnNewButton = new JButton("REGRESAR");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Menu sale = new Menu ();
+				sale.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setBounds(548, 11, 120, 23);
+		idTip.add(btnNewButton);
 		
+		JButton btnNewButton_1 = new JButton("REGRESAR");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Menu sale = new Menu ();
+				sale.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton_1.setBounds(636, 14, 89, 23);
+		idTipo.add(btnNewButton_1);
 		
 		
 	}
