@@ -185,6 +185,39 @@ System.out.println("error al consultar"+e.getMessage());
 	}
 
 }
+public void modificar (int idTipoVehiculo,int idVehiculo,int matricula,String marca,String capacidad,String modelo,String categoria) {
+	String query = "update  tblvehiculos set tipovhiculo = ?, matricula = ?, marca = ?, capacidad = ?, modelo = ?, categoria = ? where  idvehiculo = ?";
+
+    try {
+        Connection conexBd = Conexion.conectarBD();
+        PreparedStatement ps = conexBd.prepareCall(query);
+        
+        ps.setInt(1, idTipoVehiculo);
+        ps.setInt(2, matricula);
+        ps.setString(3, marca);                                       
+        ps.setString(4,capacidad);
+        ps.setString(5, modelo);
+        ps.setString(6,categoria);
+        ps.setInt(7, idVehiculo);
+       
+     
+     
+        int filasAfectadas = ps.executeUpdate();
+        if (filasAfectadas > 0) {
+        	JOptionPane.showMessageDialog(null,"Datos actualizados exitosamente.");
+        } else {
+        	JOptionPane.showMessageDialog(null,"No se pudo actualizar el registro.");
+        }
+
+    } catch (SQLException e) {
+    	JOptionPane.showMessageDialog(null,"Error al actualizar datos" + e.getMessage());
+	
+	
+	
+    }
+}
+
+
 
 
 }

@@ -131,4 +131,31 @@ public class TipoVehiculo {
 			}
 	 
 	 }
+	 
+		public void modificar (int id , String nombre,String descripcion) {
+			String query = "update tipovehiculo set nombre = ?, descripcion = ?  where idtipovehiculo = ?";
+
+	        try {
+	            Connection conexBd = Conexion.conectarBD();
+	            PreparedStatement ps = conexBd.prepareCall(query);
+	            ps.setString(1,  nombre);
+	            ps.setString(2, descripcion);
+	            ps.setInt(3, id);
+	         
+	            int filasAfectadas = ps.executeUpdate();
+	            if (filasAfectadas > 0) {
+	            	JOptionPane.showMessageDialog(null,"Datos insertados exitosamente.");
+	            } else {
+	            	JOptionPane.showMessageDialog(null,"No se pudo insertar el registro.");
+	            }
+
+	        } catch (SQLException e) {
+	        	JOptionPane.showMessageDialog(null,"Error al insertar dato" + e.getMessage());
+			
+			
+			
+	        }
+		} 
+	 
+	 
 }

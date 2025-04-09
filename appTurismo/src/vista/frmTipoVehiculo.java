@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import Model.TipoVehiculo;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -48,7 +50,7 @@ public class frmTipoVehiculo extends JFrame {
 	public frmTipoVehiculo() {
 		setTitle("TIPO DE VEHICULO");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 927, 300);
+		setBounds(100, 100, 729, 300);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -117,7 +119,7 @@ public class frmTipoVehiculo extends JFrame {
 			}
 		});
 		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Documents\\ADSO CAICEDO\\icons8-eliminar-24.png"));
-		btnEliminar.setBounds(453, 107, 113, 23);
+		btnEliminar.setBounds(580, 108, 113, 23);
 		contentPane.add(btnEliminar);
 		
 		txtCamEli = new JTextField();
@@ -147,7 +149,25 @@ public class frmTipoVehiculo extends JFrame {
 			}
 		});
 		btnNewButtonConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-magnifying-glass-tilted-right-48.png"));
-		btnNewButtonConsultar.setBounds(576, 89, 89, 41);
+		btnNewButtonConsultar.setBounds(481, 89, 89, 41);
 		contentPane.add(btnNewButtonConsultar);
+		
+		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\intercambiar-documentos (1).png"));
+		btnModificar.setBounds(574, 88, 130, 23);
+		contentPane.add(btnModificar);
+
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					tpVehiculo.modificar(Integer.parseInt(txtCamEli.getText()) ,txtnombre.getText(),txtdescripcion.getText());
+					
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "ID inválido.");
+				}
+			}
+		});
+		
+		
 	}
 }

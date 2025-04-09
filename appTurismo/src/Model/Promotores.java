@@ -17,6 +17,7 @@ public class Promotores {
 	
 	public Promotores(int id, String tipodocumento, int documento, String nombres, String apellidos, String dirección,
 			String correopersonal, String correocorp, String telefono) {
+		
 		super();
 		this.id = id;
 		this.tipodocumento = tipodocumento;
@@ -28,7 +29,30 @@ public class Promotores {
 		this.correocorp = correocorp;
 		this.telefono = telefono;
 	}
+	public String contrasena;
 	
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+	public Promotores(String contrasena) {
+		super();
+		this.contrasena = contrasena;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -219,6 +243,10 @@ try {
 			
 	        }
 		} 
-	 
+	//___________________________________________________________________________________________________________________________________________________________________________________________________________________
+	 public void ingresar(int documento, String contrasena) {
+		 
+		 
+	 }
 	 
 }
