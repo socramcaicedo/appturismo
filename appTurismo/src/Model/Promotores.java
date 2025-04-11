@@ -253,22 +253,26 @@ try {
 	        String query = "SELECT * FROM promotores WHERE documento = ? AND contraseña = ?";
 
 	        try {
-	            PreparedStatement stmt = conn.prepareStatement(query);
-	            stmt.setInt(1,documento);
-	            stmt.setString(2, contraseña);
+	            PreparedStatement ps = conn.prepareStatement(query);
+	            ps.setInt(1,documento);
+	            ps.setString(2, contraseña);
 
-	            ResultSet rs = stmt.executeQuery();
+	            ResultSet rs = ps.executeQuery();
 
 	            if (rs.next()) {
 	                resultado = true;
+
+	                
 	                
 	                Menu sale = new Menu ();
 					sale.setVisible(true);
 					dispose();
+	            }else {
+	            	JOptionPane.showMessageDialog(null,"usuario o contraseña incorrectas.");
+	            	
 	            }
-
 	            rs.close();
-	            stmt.close();
+	            ps.close();
 	            conn.close();
 
 	        } catch (SQLException e) {

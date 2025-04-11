@@ -16,6 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class Menu extends JFrame {
 
@@ -42,9 +44,12 @@ public class Menu extends JFrame {
 	 * Create the frame.
 	 */
 	public Menu() {
+		setBackground(new Color(255, 255, 255));
+		setFont(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 559, 437);
 		contentPane = new JPanel();
+		contentPane.setForeground(new Color(128, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -72,7 +77,7 @@ public class Menu extends JFrame {
 			}
 		});
 		btnCompañia.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\compania-de-seguros (1).png"));
-		btnCompañia.setBounds(31, 69, 99, 46);
+		btnCompañia.setBounds(31, 54, 99, 46);
 		contentPane.add(btnCompañia);
 		
 		JButton btnAgencia = new JButton("");
@@ -154,8 +159,17 @@ public class Menu extends JFrame {
 		contentPane.add(btnVehiculos);
 		
 		JButton btnTipoVehiculo = new JButton("");
+		btnTipoVehiculo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmTipoVehiculo  com =new frmTipoVehiculo();
+				com.setVisible(true);
+				dispose();
+				
+			}
+		});
 		btnTipoVehiculo.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\polucion.png"));
-		btnTipoVehiculo.setBounds(393, 291, 99, 46);
+		btnTipoVehiculo.setBounds(379, 291, 99, 46);
 		contentPane.add(btnTipoVehiculo);
 		
 		JButton btnNewButton_8 = new JButton("MEDIO");
@@ -167,7 +181,7 @@ public class Menu extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_8.setBounds(210, 69, 99, 46);
+		btnNewButton_8.setBounds(215, 69, 99, 46);
 		contentPane.add(btnNewButton_8);
 		
 		JButton btnNewButton_9 = new JButton("TIPO DE  MEDIO");
@@ -181,7 +195,7 @@ public class Menu extends JFrame {
 			}
 		});
 		
-		btnNewButton_9.setBounds(224, 291, 117, 46);
+		btnNewButton_9.setBounds(184, 291, 117, 46);
 		contentPane.add(btnNewButton_9);
 		
 		JButton btnNewButton = new JButton("SALIR");
@@ -193,8 +207,22 @@ public class Menu extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(423, 364, 89, 23);
+		btnNewButton.setBounds(424, 364, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		JButton reposo = new JButton("");
+		reposo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frmJuego sale = new frmJuego ();
+				sale.setVisible(true);
+				dispose();
+				
+			}
+		});
+		reposo.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Desktop\\images.jfif"));
+		reposo.setBounds(140, 119, 243, 161);
+		contentPane.add(reposo);
 	}
-
 }
